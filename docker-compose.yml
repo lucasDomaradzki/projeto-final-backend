@@ -1,0 +1,35 @@
+services:
+  e-commerce-api:
+    build:
+      context: .
+    container_name: e-commerce-api
+    ports:
+      - "9999:9999"
+      - "8080:8080"
+    depends_on:
+      - e-commerce-mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://e-commerce-mysql:3306/e_commerce
+      SPRING_DATASOURCE_USERNAME: e_commerce
+      SPRING_DATASOURCE_PASSWORD: e_commerce
+    networks:
+      e-commerce-network:
+    tty: true
+
+  e-commerce-mysql:
+    image: mysql/mysql-server:latest
+    container_name: e-commerce-mysql
+    volumes:
+      - "./src/main/resources/sql/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql"
+      - "./src/main/resources/sql/database-dml.sql:/docker-entrypoint-initdb.d/database-dml.sql"
+    environment:
+      MYSQL_DATABASE: e_commerce
+      MYSQL_USER: e_commerce
+      MYSQL_PASSWORD: e_commerce
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      e-commerce-network:
+    tty: true
+
+networks:
+  e-commerce-network:
