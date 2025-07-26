@@ -14,8 +14,13 @@ import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 public class BackendErrorExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(value = {InternalServerErrorException.class})
 
+    @ExceptionHandler(value = {InternalServerErrorException.class})
+    protected ResponseEntity<BackendDefaultResponse> handleUnexpectedError(Exception exception, WebRequest request) {
+        return ResponseEntity.internalServerError().body(new BackendDefaultResponse(INTERNAL_SERVER_ERROR.value(), exception.getMessage()));
+    }
+
+    @ExceptionHandler(value = {InternalServerErrorException.class})
     protected ResponseEntity<BackendDefaultResponse> handleInternalServerException(InternalServerErrorException exception, WebRequest request) {
         return ResponseEntity.internalServerError().body(new BackendDefaultResponse(INTERNAL_SERVER_ERROR.value(), exception.getMessage()));
     }

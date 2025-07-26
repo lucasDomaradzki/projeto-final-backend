@@ -44,7 +44,7 @@ public class ProductListService implements IProductListService {
 
     @Override
     public ProductListDTO findProductListDetailsByProductListUUID(String productListUUID) throws BackendMainException {
-        return productListRepository.findByuuid(productListUUID).map(productList -> mapProductListDetailedDTO(productList))
+        return productListRepository.findByuuid(productListUUID).map(this::mapProductListDetailedDTO)
                 .orElseThrow(() -> new NotFoundErrorException("Could not find product list for id: {}", productListUUID));
     }
 
