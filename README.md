@@ -41,7 +41,7 @@ docker compose start
 Para accesar o swagger abra em seu browser na página:
 http://localhost:8080/swagger-ui.html
 
-![alt text](https://raw.githubusercontent.com/lucasDomaradzki/buymore/refs/heads/main/src/main/resources/static/Screenshot%20from%202025-02-07%2016-12-43.png)
+![alt text](https://github.com/user-attachments/assets/6c9605f7-f8bf-4d5a-9bc2-b543b6dbd2a6)
 
 ### Accesando  Banco de dados
 O banco de dados MySQL está exposto com os seguintes detalhes:
